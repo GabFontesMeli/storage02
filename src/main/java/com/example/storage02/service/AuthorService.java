@@ -1,5 +1,6 @@
 package com.example.storage02.service;
 
+import com.example.storage02.dto.AuthorDTO;
 import com.example.storage02.model.Author;
 import com.example.storage02.repository.AuthorRepo;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public class AuthorService implements IAuthorService {
 
     @Override
     public Author insert(Author author) {
+        author.getAddress().setAuthor(author);
         return authorRepo.save(author);
     }
 
@@ -23,5 +25,25 @@ public class AuthorService implements IAuthorService {
         Optional<Author> optionalAuthor = authorRepo.findById(id);
 
         return optionalAuthor.orElse(null);
+    }
+
+    @Override
+    public void deleteById(long id) {
+        authorRepo.deleteById(id);
+    }
+
+    @Override
+    public AuthorDTO getById(long id) {
+        return authorRepo.getById(id);
+    }
+
+    @Override
+    public Author getNativeById(long id) {
+        return authorRepo.getNativeById(id);
+    }
+
+    @Override
+    public AuthorDTO getDtoEagle(long id) {
+        return authorRepo.getDtoEagle(id);
     }
 }

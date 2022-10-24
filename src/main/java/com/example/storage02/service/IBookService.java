@@ -4,4 +4,5 @@ import com.example.storage02.model.Book;
 
 public interface IBookService {
     Book findById(long id);
+    void deleteById(long id);
 }

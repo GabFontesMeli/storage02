@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,7 +21,11 @@ public class Subject {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("subject")
     private List<Book> books;
+
+    @ManyToMany(mappedBy = "books")
+    @JsonIgnoreProperties("books")
+    private Set<Author> authors;
 }
